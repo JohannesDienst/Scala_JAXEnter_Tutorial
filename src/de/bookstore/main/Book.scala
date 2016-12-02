@@ -8,7 +8,7 @@ package de.bookstore.main
  * advanced component architectures through classes
  * and traits.
  */
-class Book (val title: String, author: String, var isbn10: Long) {
+class Book (val title: String, author: String, var isbn10: Long) extends Export {
   
   def this(title: String) {
     this(title, "", -1)
@@ -27,13 +27,15 @@ class Book (val title: String, author: String, var isbn10: Long) {
     but not when calling println(). 
   */
   def getDigit: String = {
-  
     isbn10.toString() takeRight(1) // takeRight 1
   }
   
   override def toString: String =
     title + ", " + author + ", " + this.isbn10
 
+  def exportCSV: String = {
+    title + ";" + author + ";" + this.isbn10
+  }
 }
 
 object Book {
@@ -48,10 +50,11 @@ object Book {
 //    book.author = "Robert" // Error: not a member
     println(book.isbn10)
     book.isbn10 = 1234567890
-    
+
     println(book.getDigit)
     
     println(Book.validateISBN10(3826655486L))
+    println(book.exportCSV)
   }
   
   def validateISBN10(isbn: Long) :Boolean = {
