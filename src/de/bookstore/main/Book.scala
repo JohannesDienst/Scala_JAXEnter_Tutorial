@@ -27,12 +27,13 @@ class Book (val title: String, author: String, var isbn10: Long) extends Export 
     but not when calling println(). 
   */
   def getDigit: String = {
-    isbn10.toString() takeRight(1) // takeRight 1
+    isbn10.toString() takeRight(1)
   }
   
   override def toString: String =
     title + ", " + author + ", " + this.isbn10
 
+  def encode = false
   def exportCSV: String = {
     title + ";" + author + ";" + this.isbn10
   }
