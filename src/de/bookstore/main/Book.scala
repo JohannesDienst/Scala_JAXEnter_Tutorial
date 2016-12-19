@@ -8,7 +8,8 @@ package de.bookstore.main
  * advanced component architectures through classes
  * and traits.
  */
-class Book (val title: String, author: String, var isbn10: Long) extends Export {
+class Book (val title: String, author: String, val isbn10: Long)
+  extends Export {
   
   def this(title: String) {
     this(title, "", -1)
@@ -50,7 +51,7 @@ object Book {
 //    println(book.author) // Error: not a member
 //    book.author = "Robert" // Error: not a member
     println(book.isbn10)
-    book.isbn10 = 1234567890
+//    book.isbn10 = 1234567890
 
     println(book.getDigit)
     
@@ -63,7 +64,6 @@ object Book {
       var t: Int = 0
 
       val digits = isbn.toString().map(_.toChar)
-      
       for (i <- 0 to 8) {
         t += digits(i);
         s += t;
