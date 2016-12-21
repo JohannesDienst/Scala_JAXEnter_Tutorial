@@ -58,8 +58,9 @@ object Book {
     println(Book.validateISBN10(3826655486L))
     println(book.exportCSV)
   }
+
   
-  def validateISBN10(isbn: Long) :Boolean = {
+  def validateISBN10(isbn: Long): Boolean = {
       var s: Int = 0
       var t: Int = 0
 
