@@ -1,4 +1,4 @@
-# Scala_JaxEnter_Tutorial
+# Scala_JAXEnter_Tutorial
 
 Repository for the Scala Tutorial on https://jaxenter.de/
 
