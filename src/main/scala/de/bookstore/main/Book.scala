@@ -1,6 +1,5 @@
 package de.bookstore.main
 
-
 /*
  * Scala is a pure-bred object-oriented language.
  * Conceptually, every value is an object and every

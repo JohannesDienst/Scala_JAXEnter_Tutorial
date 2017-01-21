@@ -1,4 +1,7 @@
+.cache-tests
+.settings
 /bin/
 /.project
 /.classpath
 /.cache-main
+target/
