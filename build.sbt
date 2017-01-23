@@ -10,7 +10,4 @@ lazy val root = (project in file(".")).
     name := "Scala_JaxEnter_Tutorial",
     logBuffered in Test := false,
     libraryDependencies ++= testDeps
-  ).
-  settings(
-    libraryDependencies ++= testDeps
   )
