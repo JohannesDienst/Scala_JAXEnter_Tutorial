@@ -1,0 +1,27 @@
+<books><book>
+          <title>The Pragmatic Programmer</title>
+          <author>Andrew Hunt</author>
+          <isbn10>3446223096</isbn10>
+          <formats>epub</formats>
+      </book><book>
+          <title>The Mythical Man-Month</title>
+          <author>Frederik P. Brooks</author>
+          <isbn10>201835959</isbn10>
+          <formats>epub,pdf</formats>
+      </book><book>
+          <title>Clean Code</title>
+          <author>Uncle Bob</author>
+          <isbn10>1234567890</isbn10>
+      </book><book>
+          <title>Clean Coder</title>
+          <author>Robert Cecil Martin</author>
+          <isbn10>137081073</isbn10>
+      </book><book>
+          <title>Code Complete 2</title>
+          <author>Steve McConnell</author>
+          <isbn10>735619670</isbn10>
+      </book><book>
+          <title>Design Patterns</title>
+          <author>Erich Gamma</author>
+          <isbn10>1201633612</isbn10>
+      </book></books>
