@@ -1,6 +1,8 @@
 # Scala_JAXEnter_Tutorial
 
 Repository for the Scala Tutorial on https://jaxenter.de/
+Links to Articles:
+* https://jaxenter.de/scala-tutorial-teil-1-51396
 
 Tags for every part:
 
