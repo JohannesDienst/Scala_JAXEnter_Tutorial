@@ -3,6 +3,7 @@
 Repository for the Scala Tutorial on https://jaxenter.de/
 Links to Articles:
 * https://jaxenter.de/scala-tutorial-teil-1-51396
+* https://jaxenter.de/scala-tutorial-teil-2-52508
 
 Tags for every part:
 
