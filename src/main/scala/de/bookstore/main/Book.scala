@@ -17,7 +17,7 @@ class Book (val title: String, author: String, var isbn10: Long)
   def this(title: String, isbn10: Long) {
     this(title, "", isbn10)
   }
-  
+
   /*
   Scala style guide says...
 
@@ -52,7 +52,7 @@ object Book {
   def main(args: Array[String]): Unit = {
     val book = new Book("Clean Code", "Uncle Bob", 3826655486L)
     println(book)
-    
+
     println(book.title)
 //    book.title = "Another One" // reassignment to val
 //    println(book.author) // Error: not a member
@@ -70,16 +70,13 @@ object Book {
 
   def validateISBN10(isbn: Long): Boolean = {
     var s: Int = 0
-    var t: Int = 0
 
     var digits = isbn.toString().map(_.toChar)
     if (digits.length() < 10) digits = "0" + digits
     if (digits.length() < 10) return false
     for (i <- 0 to 8) {
-      t += digits(i);
-      s += t;
+      s += ((i+1) * digits(i).asDigit);
     }
-
     (s % 11) == digits(9).asDigit
   }
 
@@ -88,6 +85,10 @@ object Book {
     val author = (node \ "author").text
     val isbn10 = (node \ "isbn10").text.toLong
     new Book(title, author, isbn10)
+  }
+
+  def fromCSV(line: Array[String]): Book = {
+    new Book(line(0), line(1), line(2).toLong)
   }
 
   def unapply(book: Book) = Some(book.title, book.isbn10)
