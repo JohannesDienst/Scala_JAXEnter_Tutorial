@@ -54,7 +54,7 @@ class DatabaseCSV(dbPath: String = "src/main/resources/database.csv") extends Da
     }
     val csv = books.map(b => b.exportCSV)
     val pw = new PrintWriter(new File(filePath))
-    pw.write(csv mkString "\n")
+    pw.write(csv.mkString("\n"))
     pw.close()
   }
 
