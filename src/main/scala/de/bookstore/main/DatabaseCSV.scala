@@ -14,7 +14,7 @@ import scala.util._
 class DatabaseCSV(dbPath: String = "src/main/resources/database.csv") extends Database {
 
   val books: ListBuffer[Book] = ListBuffer[Book]()
-  readFromFile();
+  readFromFile()
 
   private def readFromFile() = {
     val reader = new BufferedReader(new FileReader(dbPath))
@@ -31,8 +31,9 @@ class DatabaseCSV(dbPath: String = "src/main/resources/database.csv") extends Da
       // DO NOT USE THIS: Catches JVM errors too!
       //case e: Throwable => e.printStackTrace()
 
-      // Use this instead to catch everything none fatal
+      // Use this instead to catch everything non fatal
       case NonFatal(e) => e.printStackTrace()
+
     } finally {
       reader.close()
     }
@@ -48,8 +49,7 @@ class DatabaseCSV(dbPath: String = "src/main/resources/database.csv") extends Da
   }
 
   def save(filePath: String = "src/main/resources/database.csv") = {
-    if (!Files.exists(Paths.get(filePath)))
-    {
+    if (!Files.exists(Paths.get(filePath))) {
       throw new AccessControlException("File does not exist")
     }
     val csv = books.map(b => b.exportCSV)
