@@ -81,7 +81,7 @@ class DatabaseCSV(dbPath: String = "src/main/resources/database.csv") extends Da
     )
   }
 
-  def findBooks(title: String, bookType: String): List[Book] = {
+  def findBooks(title: String = "", bookType: String = ""): List[Book] = {
     return this.books.toList
   }
 }
@@ -90,8 +90,51 @@ object DatabaseCSV {
   def main(args: Array[String]): Unit = {
     val db = new DatabaseCSV()
 
-    println(db.findBooks("", ""))
+    println("/******* Option usage *******/")
+    /* Ways to deal with Option */
+    val books: Option[List[Book]] = Option(db.findBooks())
 
+    // DO NOT USE THIS
+    if (books.isDefined) {
+      println(books)
+    }
+
+
+    // Use this instead
+    val bookList = books.getOrElse(List())
+    println(bookList)
+
+    // foreach: provided function is called once if
+    //          value is present
+    books.foreach { l => println(l.size) }
+
+    // filter
+    println(books.filter( _.isEmpty )) // Returns None
+    println(books.filter( !_.isEmpty )) // Returns Some(List(...))
+
+    // map
+    println(books.map(_(0).title))
+    println(None.map { _ == true })
+    println("/****************************/\n")
+
+    // for comprehension
+    val listTitleOption =
+      Some(Some("Clean Code"))
+    for {
+      some <- listTitleOption
+      title <- some
+    } yield title // String
+    val listTitleOptions: List[Option[String]] =
+    List(Some("Clean Code"), None, Some("Code Complete"))
+    for {
+      titles <- listTitleOptions
+      title <- titles
+    } yield title
+
+    // TODO flatmap
+
+    println("/******* Try usage **********/")
+    /* Usage of Try */
     val saveResult = Try(db.save("blub"))
     saveResult match {
       case Failure(thrown) => {
@@ -120,5 +163,7 @@ object DatabaseCSV {
         case e => e.printStackTrace()
       }
     )
+
+        println("/****************************/\n")
   }
 }
