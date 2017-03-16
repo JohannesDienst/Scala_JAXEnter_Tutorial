@@ -115,24 +115,37 @@ object DatabaseCSV {
     // map
     println(books.map(_(0).title))
     println(None.map { _ == true })
-    println("/****************************/\n")
+
+    // flatmap
+    println("flatmap examples:")
+    val numbers: List[List[Int]] =
+      List(List(), List(7), List(42, 27))
+    numbers.map(_.map(_ * 2))
+    println(numbers.map(_.map(_ * 2)))
+    println(numbers.flatMap(_.map(_ * 2)))
+
+    val flatMapOption: List[Option[Int]] = List(Some(27), None, Some(42))
+    /* List(Some(54), None, Some(84)) */
+    println(flatMapOption.map(_.map(_ * 2)))
+    /* List(54, 84) */
+    println(flatMapOption.flatMap(_.map(_ * 2)))
 
     // for comprehension
-    val listTitleOption =
-      Some(Some("Clean Code"))
+    val nestedOption = Some(Some("Clean Code"))
     for {
-      some <- listTitleOption
+      some <- nestedOption
       title <- some
     } yield title // String
+
     val listTitleOptions: List[Option[String]] =
-    List(Some("Clean Code"), None, Some("Code Complete"))
+      List(Some("Clean Code"), None, Some("Code Complete"))
+
     for {
-      titles <- listTitleOptions
+      titles <- listTitleOptions // Option[String]
       title <- titles
     } yield title
 
-    // TODO flatmap
-
+    println("/****************************/\n")
     println("/******* Try usage **********/")
     /* Usage of Try */
     val saveResult = Try(db.save("blub"))
