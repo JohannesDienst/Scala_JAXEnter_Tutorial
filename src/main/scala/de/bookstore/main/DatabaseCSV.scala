@@ -114,7 +114,7 @@ object DatabaseCSV {
 
     // map
     println(books.map(_(0).title))
-    println(None.map { _ == true })
+    println(None.map(_ == true ))
 
     // flatmap
     println("flatmap examples:")
