@@ -106,7 +106,7 @@ object DatabaseCSV {
 
     // foreach: provided function is called once if
     //          value is present
-    books.foreach { l => println(l.size) }
+    books.foreach(l => println(l.size))
 
     // filter
     println(books.filter( _.isEmpty )) // Returns None
