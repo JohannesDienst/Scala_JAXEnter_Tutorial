@@ -110,7 +110,7 @@ object DatabaseCSV {
 
     // filter
     println(books.filter( _.isEmpty )) // Returns None
-    println(books.filter( !_.isEmpty )) // Returns Some(List(...))
+    println(books.filter( !_.isEmpty )) // Returns Some(List[Book])
 
     // map
     println(books.map(_(0).title))
