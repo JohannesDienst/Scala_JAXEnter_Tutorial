@@ -66,7 +66,7 @@ class DatabaseCSV(dbPath: String = "src/main/resources/database.csv") extends Da
       throw new IllegalArgumentException("Invalid ISBN10");
     }
     */
-    
+
     def validate(book: Book): Either[String, Book] = {
       if (Book.validateISBN10(book.isbn10)) {
         Right(book)
@@ -131,21 +131,83 @@ object DatabaseCSV {
     println(flatMapOption.flatMap(_.map(_ * 2)))
 
     // for comprehension
+    println("for comprehension examples:")
     val nestedOption = Some(Some("Clean Code"))
-    for {
+    // Return type: Option[String]
+    val test = for {
       some <- nestedOption
       title <- some
-    } yield title // String
+    } yield title
 
     val listTitleOptions: List[Option[String]] =
       List(Some("Clean Code"), None, Some("Code Complete"))
 
+    // Return type: List[String]
     for {
-      titles <- listTitleOptions // Option[String]
-      title <- titles
+      option <- listTitleOptions // Option[String]
+      title <- option
     } yield title
 
     println("/****************************/\n")
+
+    println("/******* Either usage *******/")
+    def validate(book: Book): Either[String, Book] = {
+      if (Book.validateISBN10(book.isbn10)) {
+        Right(book)
+      } else {
+        Left("Book has invalid ISBN10: " + book)
+      }
+    }
+    val either = validate(new Book("Clean Code", "Uncle Bob", 137081073L))
+    val either2 = validate(new Book("Code Complete 2", "Steve McConnell", 735619670L))
+
+    // Pattern Matching
+    println("Pattern matching")
+    either match {
+      case Left(error) => println("Left: " + error)
+      case Right(book) => println("Right: " + book)
+    }
+
+    // Left/Right Projection
+    println("Projection")
+    either.left.map(println(_)) // Either[Unit, Book]
+    either.right.map(println(_)) // Either[Unit, Book]
+
+    // flatMap
+    val notFlat: Either[String, Either[String, String]] = 
+      either.right.map(a =>
+        either2.right.map(b =>
+          s"Title1: $a.title, Title2: $b.title"
+        )
+      )
+    val flat: Either[String, String] = either.right.flatMap(a =>
+      either2.right.map(b =>
+        s"Title1: $a.title, Title2: $b.title"
+      )
+    )
+
+    // for comprehension
+    println("for comprehension")
+    val comprehend: Either[String, String] =
+      for {
+        e1 <- either.right
+        e2 <- either2.right
+      } yield s"Title1: $e1.title, Title2: $e2.title"
+    println(comprehend)
+    val comprehend2: Either[String, String] =
+      for {
+        e1 <- either.right
+        e2 <- either2.right
+        /* Will not compile: no map on Right!!
+        t1 = e1.title
+        t2 = e2
+        */
+        t1 <- Right(e1.title).right
+        t2 <- Right(e2.title).right
+      } yield s"Title1: $t1, Title2: $t2"
+    println(comprehend2)
+    println("/****************************/\n")
+
     println("/******* Try usage **********/")
     /* Usage of Try */
     val saveResult = Try(db.save("blub"))
@@ -157,6 +219,8 @@ object DatabaseCSV {
         println(s)
       }
     }
+
+    println(saveResult.getOrElse("That went wrong!"))
 
     // Retrieve Throwable: Fails when no Exception thrown
     println(saveResult.failed.get)
@@ -177,6 +241,14 @@ object DatabaseCSV {
       }
     )
 
-        println("/****************************/\n")
+    // Recover in for comprehension
+    println(for {
+      i <- Try(Integer.parseInt("42a")).recover({case e => -1})
+    } yield i)
+    println(for {
+      i <- Try(Integer.parseInt("42a"))
+    } yield i)
+
+    println("/****************************/\n")
   }
 }
