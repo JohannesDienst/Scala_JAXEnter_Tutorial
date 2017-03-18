@@ -198,7 +198,10 @@ object DatabaseCSV {
       for {
         e1 <- either.right
         e2 <- either2.right
-        /* Will not compile: no map on Right!!
+        /* Will not compile: no map on Either!!
+         * e1 and e2 are not instances of Right here but
+         * of Either due to the implementation of
+         * for-Comprehension
         t1 = e1.title
         t2 = e2
         */
