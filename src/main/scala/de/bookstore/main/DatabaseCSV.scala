@@ -203,12 +203,24 @@ object DatabaseCSV {
          * of Either due to the implementation of
          * for-Comprehension
         t1 = e1.title
-        t2 = e2
+        t2 = e2.title
         */
         t1 <- Right(e1.title).right
         t2 <- Right(e2.title).right
       } yield s"Title1: $t1, Title2: $t2"
     println(comprehend2)
+
+    /* Example of what the compiler produces from
+     * above for comprehension
+    either.right.flatMap { e1 =>
+      either2.right.map { e2 =>
+        val t1 = e1.title
+        val t2 = e2.title
+        (t1, t2)
+      }.map { case (x, y) => s"Title1: $x, Title2: $y" }
+    }
+    */
+
     println("/****************************/\n")
 
     println("/******* Try usage **********/")
