@@ -9,6 +9,7 @@ Tags for every part:
 
 * part-one
 * part-two
+* part-three
 
 Instructions for part-two:
 
