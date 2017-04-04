@@ -4,8 +4,10 @@ class EBook(
   title: String,
   val author: String,
   isbn10: Long = -1,
-  val formats: List[String] = List[String]())
-  extends Book(title, author, isbn10) {
+  val formats: List[String] = List[String](),
+  quantity: Int = 1
+  )
+  extends Book(title, author, isbn10, quantity) {
 
     def this(title: String) = {
       this(title, "John", -1)

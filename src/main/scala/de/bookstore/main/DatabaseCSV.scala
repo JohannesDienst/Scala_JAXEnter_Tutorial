@@ -224,7 +224,6 @@ object DatabaseCSV {
     println("/****************************/\n")
 
     println("/******* Try usage **********/")
-    /* Usage of Try */
     val saveResult = Try(db.save("blub"))
     saveResult match {
       case Failure(thrown) => {
