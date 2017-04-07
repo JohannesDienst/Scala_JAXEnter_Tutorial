@@ -1,25 +1,24 @@
 package de.bookstore.main
 
+import de.bookstore.main.Lib.PublicationClassicBook
+
 object Main {
-  //  def findAvailable(xs: List[Magazine]): List[Magazine] = {
-  //    xs.filter(m => m.quantity > 0)
-  //  }
 
-  import Lib.Publication
-  def findAvailable[T](xs: List[T])(implicit ev: Publication[T]): List[T] = {
-    xs.filter(m => ev.getQuantity(m) > 0)
-  }
-
-  def findAvailable2[T: Publication](xs: List[T]): List[T] = {
-    xs.filter(m => implicitly[Publication[T]].getQuantity(m) > 0)
-  }
+  import Lib.findAvailableClassic
+  import Lib.findAvailable
 
   def main(args: Array[String]): Unit = {
+    // Usage of adapter pattern
     val book0 = new Book("Clean Code", "Uncle Bob", 3826655486L)
     val book1 = new Book("Code Complete 2", "Steve McConnell", 735619670L, 0)
     val book2 = new Book("The Pragmatic Programmer", "Andrew Hunt", 3446223096L, 0)
-    val books = List(book0, book1, book2)
 
+    val booksClassic = List(PublicationClassicBook(book0),
+      PublicationClassicBook(book1), PublicationClassicBook(book2))
+    println(findAvailableClassic(booksClassic))
+
+    // Usage of Type Classes
+    val books = List(book0, book1, book2)
     println(findAvailable(books))
 
     val numbers = List(27, 42)
@@ -27,7 +26,7 @@ object Main {
     // findAvailable(numbers)
 
     implicit object PublicationEbook extends Lib.Publication[EBook] {
-      def getQuantity(eb: EBook): Int = eb.quantity
+      def getQuantity(eb: EBook): Int = 1
     }
 
     val ebook0 = new EBook("Clean Code", "Uncle Bob", 3826655486L)
@@ -63,7 +62,7 @@ object Main {
     }
     println(aList.sorted)
 
-    // Write your own explicit
+    // Write your own implicit
     implicit def orderBooks[A <: Book]: Ordering[A] =
       Ordering.by(b => (b.quantity))
     println(books.sorted)
