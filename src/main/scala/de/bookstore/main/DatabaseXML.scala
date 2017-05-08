@@ -14,12 +14,15 @@ class DatabaseXML(dbPath: String = "src/main/resources/database.xml") extends Da
   private def readFromFile() = {
     val root: Elem = XML.loadFile(dbPath)
     val books = ListBuffer[Book]()
+
     for (n <- (root \\ "book") if (!(n \ "formats").isEmpty)) {
       books += EBook.fromXml(n)
     }
+
     for (n <- (root \\ "book") if ((n \ "formats").isEmpty)) {
       books += Book.fromXml(n)
     }
+
     books
   }
 

@@ -1,35 +1,20 @@
 package de.bookstore.main
 
-/*
- * Scala is a pure-bred object-oriented language.
- * Conceptually, every value is an object and every
- * operation is a method-call. The language supports
- * advanced component architectures through classes
- * and traits.
- */
 class Book (val title: String, author: String, var isbn10: Long)
   extends Export {
-  
+
   def this(title: String) {
     this(title, "", -1)
   }
-  
+
   def this(title: String, isbn10: Long) {
     this(title, "", isbn10)
   }
 
-  /*
-  Scala style guide says...
-
-    Omit empty parenthesis, only be used when the method in question
-    has no side-effects (purely-functional). In other words, it
-    would be acceptable to omit parentheses when calling queue.size,
-    but not when calling println(). 
-  */
   def getDigit: String = {
     isbn10.toString() takeRight(1)
   }
-  
+
   override def toString: String =
     title + ", " + author + ", " + this.isbn10
 

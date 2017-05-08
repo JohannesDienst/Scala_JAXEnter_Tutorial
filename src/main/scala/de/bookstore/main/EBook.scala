@@ -27,9 +27,9 @@ class EBook(
 object EBook {
   def main(args: Array[String]): Unit = {
     val ebook = new EBook(title="Learning Scala", "John");
-//    println(ebook.author) // Prints John
-//    println(ebook.isbn10) // Prints -1
-//    println(ebook.formats) // Prints List()
+    println(ebook.author) // Prints John
+    println(ebook.isbn10) // Prints -1
+    println(ebook.formats) // Prints List()
     println(ebook)
     println(s"Title: ${ebook.title}")
 

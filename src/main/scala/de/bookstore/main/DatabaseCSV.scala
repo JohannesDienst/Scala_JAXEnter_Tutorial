@@ -52,6 +52,7 @@ class DatabaseCSV(dbPath: String = "src/main/resources/database.csv") extends Da
     if (!Files.exists(Paths.get(filePath))) {
       throw new AccessControlException("File does not exist")
     }
+
     val csv = books.map(b => b.exportCSV)
     val pw = new PrintWriter(new File(filePath))
     pw.write(csv.mkString("\n"))
@@ -91,6 +92,7 @@ object DatabaseCSV {
     val db = new DatabaseCSV()
 
     println("/******* Option usage *******/")
+
     /* Ways to deal with Option */
     val books: Option[List[Book]] = Option(db.findBooks())
 
@@ -98,7 +100,6 @@ object DatabaseCSV {
     if (books.isDefined) {
       println(books)
     }
-
 
     // Use this instead
     val bookList = books.getOrElse(List())
@@ -161,20 +162,18 @@ object DatabaseCSV {
     val either = validate(new Book("Clean Code", "Uncle Bob", 137081073L))
     val either2 = validate(new Book("Code Complete 2", "Steve McConnell", 735619670L))
 
-    // Pattern Matching
     println("Pattern matching")
     either match {
       case Left(error) => println("Left: " + error)
       case Right(book) => println("Right: " + book)
     }
 
-    // Left/Right Projection
-    println("Projection")
+    println("Left/Right Projection")
     either.left.map(println(_)) // Either[Unit, Book]
     either.right.map(println(_)) // Either[Unit, Book]
 
     // flatMap
-    val notFlat: Either[String, Either[String, String]] = 
+    val notFlat: Either[String, Either[String, String]] =
       either.right.map(a =>
         either2.right.map(b =>
           s"Title1: $a.title, Title2: $b.title"
@@ -194,6 +193,7 @@ object DatabaseCSV {
         e2 <- either2.right
       } yield s"Title1: $e1.title, Title2: $e2.title"
     println(comprehend)
+
     val comprehend2: Either[String, String] =
       for {
         e1 <- either.right
@@ -224,7 +224,6 @@ object DatabaseCSV {
     println("/****************************/\n")
 
     println("/******* Try usage **********/")
-    /* Usage of Try */
     val saveResult = Try(db.save("blub"))
     saveResult match {
       case Failure(thrown) => {
@@ -240,7 +239,6 @@ object DatabaseCSV {
     // Retrieve Throwable: Fails when no Exception thrown
     println(saveResult.failed.get)
 
-    // Recover
     saveResult.recover( {
         case e => println("Your recovery logic here")
       }
@@ -260,6 +258,7 @@ object DatabaseCSV {
     println(for {
       i <- Try(Integer.parseInt("42a")).recover({case e => -1})
     } yield i)
+
     println(for {
       i <- Try(Integer.parseInt("42a"))
     } yield i)
