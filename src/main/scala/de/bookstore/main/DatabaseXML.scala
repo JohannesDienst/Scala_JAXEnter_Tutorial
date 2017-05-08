@@ -6,6 +6,7 @@ import scala.xml.Node
 import scala.xml.Elem
 import scala.io.Source
 import scala.collection.mutable.ListBuffer
+import de.bookstore.main.traits.Database
 
 class DatabaseXML(dbPath: String = "src/main/resources/database.xml") extends Database {
 

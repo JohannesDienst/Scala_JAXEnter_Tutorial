@@ -1,4 +1,6 @@
-package de.bookstore.main
+package de.bookstore.main.traits
+
+import de.bookstore.main.Book
 
 trait Database {
   def save(filePath: String)

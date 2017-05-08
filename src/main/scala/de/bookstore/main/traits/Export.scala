@@ -1,4 +1,4 @@
-package de.bookstore.main
+package de.bookstore.main.traits
 
 trait Export {
   def isEncoded() = println(encode)

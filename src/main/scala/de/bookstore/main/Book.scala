@@ -1,5 +1,7 @@
 package de.bookstore.main
 
+import de.bookstore.main.traits.Export
+
 class Book (val title: String, author: String, var isbn10: Long)
   extends Export {
 

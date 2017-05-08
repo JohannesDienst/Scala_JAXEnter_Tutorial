@@ -10,6 +10,7 @@ import java.nio.file.{Paths, Files}
 import java.io.PrintWriter
 import java.io.File
 import scala.util._
+import de.bookstore.main.traits.Database
 
 class DatabaseCSV(dbPath: String = "src/main/resources/database.csv") extends Database {
 
