@@ -2,7 +2,14 @@ package de.bookstore.main
 
 import de.bookstore.main.traits.Export
 
-class Book (val title: String, author: String, var isbn10: Long)
+/*
+ * Scala is a pure-bred object-oriented language.
+ * Conceptually, every value is an object and every
+ * operation is a method-call. The language supports
+ * advanced component architectures through classes
+ * and traits.
+ */
+class Book (val title: String, author: String, var isbn10: Long, var quantity: Int = 1)
   extends Export {
 
   def this(title: String) {
