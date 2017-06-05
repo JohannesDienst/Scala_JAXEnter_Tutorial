@@ -58,4 +58,20 @@ object IndexTypeMember {
 
   val aIndex = new AIndex()
   aIndex.add(book1)
+
+  /*
+   * Little demo code for self types
+   */
+  trait A { }
+  trait B { this: A => {}}
+
+  /*
+   * Produces:
+   * illegal inheritance; self-type de.bookstore.main.special.IndexTypeMember.C
+   * does not conform to de.bookstore.main.special.IndexTypeMember.B's selftype
+   * de.bookstore.main.special.IndexTypeMember.B with de.bookstore.main.special.IndexTypeMember.A
+   */
+  //trait C extends B {}
+
+  trait C extends A with B {}
 }
