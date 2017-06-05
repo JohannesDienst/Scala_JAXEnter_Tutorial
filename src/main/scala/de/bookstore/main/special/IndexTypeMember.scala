@@ -13,6 +13,8 @@ import de.bookstore.main.EBook
  * Excellent blog with discussion about possible use cases:
  * http://www.artima.com/weblogs/viewpost.jsp?thread=270195
  * Discussion with good examples: http://www.artima.com/forums/flat.jsp?forum=106&thread=270195
+ *
+ * Self types: http://marcus-christie.blogspot.de/2014/03/scala-understanding-self-type.html
  */
 trait IndexTypeMember {
 
