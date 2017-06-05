@@ -74,4 +74,23 @@ object IndexTypeMember {
   //trait C extends B {}
 
   trait C extends A with B {}
+
+  /*
+   * Multiple type members
+   */
+  trait X { type T; type U; type W }
+  trait Y extends X {}
+  trait Z extends Y { type T = String }
+  class AClass[M] extends Z { type U = M; type W = String }
+  new AClass[Boolean]
+
+  /*
+   * Multiple type parameters
+   * Difference: You cannot leave out a type parameter in I or J or BClass!
+   */
+  trait H[T, U, W] {}
+  trait I[T, U, W] extends H[T, U, W] {}
+  trait J[U, W] extends I[String, U, W] {}
+  class BClass[M] extends J[M, String] {}
+  new AClass[Boolean]
 }
