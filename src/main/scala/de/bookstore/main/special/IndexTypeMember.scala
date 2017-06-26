@@ -39,7 +39,7 @@ trait ProseIndex {
   this: IndexTypeMember => type ElementType = Book
 }
 
-class AIndex extends IndexTypeMember with ProseIndex {
+class AIIndex extends IndexTypeMember with ProseIndex {
   // Nothing
 }
 
@@ -56,14 +56,15 @@ object IndexTypeMember {
    */
 //  index.add("This is Library!");
 
-  val aIndex = new AIndex()
+  val aIndex = new AIIndex()
   aIndex.add(book1)
 
   /*
    * Little demo code for self types
    */
   trait A { }
-  trait B { this: A => {}}
+  trait B { this: A => }
+  trait C { this: A => }
 
   /*
    * Produces:
@@ -71,9 +72,9 @@ object IndexTypeMember {
    * does not conform to de.bookstore.main.special.IndexTypeMember.B's selftype
    * de.bookstore.main.special.IndexTypeMember.B with de.bookstore.main.special.IndexTypeMember.A
    */
-  //trait C extends B {}
+  //trait D extends B {}
 
-  trait C extends A with B {}
+  trait D extends A with B {}
 
   /*
    * Multiple type members
