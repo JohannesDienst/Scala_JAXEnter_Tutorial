@@ -8,7 +8,7 @@ class LibraryDRM extends Library {
 
   val books = ListBuffer[Book]()
 
-  def add(book: Book) {}
+  def add(book: Book) { books += book }
 
   class DRMBook(
     title: String,
