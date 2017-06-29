@@ -13,6 +13,7 @@ Tags for every part:
 * part-two
 * part-three
 * part-four
+* part-five
 
 Instructions for part-two:
 
